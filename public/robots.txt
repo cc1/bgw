@@ -1,0 +1,4 @@
+# Block all crawlers until custom domain is configured
+# Remove this file when bethglick.com points to this site
+User-agent: *
+Disallow: /

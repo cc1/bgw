@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { url } from '../utils/paths';
 
 const photos = [
   { src: "/images/gallery/krabi-thailand.jpg", location: "Krabi, Thailand" },
@@ -28,12 +29,12 @@ const photos = [
         <div class="break-inside-avoid group">
           <button
             class="w-full text-left cursor-zoom-in"
-            data-lightbox-src={photo.src}
+            data-lightbox-src={url(photo.src)}
             data-lightbox-caption={photo.location}
           >
             <div class="rounded-xl overflow-hidden bg-stone-200">
               <img
-                src={photo.src}
+                src={url(photo.src)}
                 alt={photo.location}
                 class="w-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"

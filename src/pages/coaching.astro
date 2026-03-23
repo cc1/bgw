@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { url } from '../utils/paths';
 ---
 
 <BaseLayout title="Coaching" description="Beth Glick offers coaching for those called to draw outside the lines.">
@@ -7,7 +8,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Hero image -->
     <div class="w-full h-64 md:h-80 rounded-xl overflow-hidden bg-stone-200 mb-12">
       <img
-        src="/images/hero/coaching-hero.jpg"
+        src={url("/images/hero/coaching-hero.jpg")}
         alt="Coaching"
         class="w-full h-full object-cover"
       />
@@ -34,7 +35,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Second image -->
     <div class="w-full h-64 md:h-80 rounded-xl overflow-hidden bg-stone-200 my-12">
       <img
-        src="/images/hero/coaching-secondary.jpg"
+        src={url("/images/hero/coaching-secondary.jpg")}
         alt="Coaching"
         class="w-full h-full object-cover"
       />

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const publications = [
+  {
+    title: "Investigating Individual Intuitive Expression: Norms and Patterns in the Noetic Signature Inventory",
+    journal: "Journal of Consciousness Studies",
+    date: "January 2026",
+    coauthors: "Helané Wahbeh, Michael Kriegsman",
+    description: "A large-scale study validating the Noetic Signature Inventory (NSI) and mapping patterns in how individuals experience and report intuitive and noetic phenomena.",
+    url: "",
+  },
+  {
+    title: "Can Trance Channeling Be Learned? A Case Study of a Scientist's Experience",
+    journal: "Journal of Scientific Exploration",
+    date: "December 2025",
+    coauthors: "Helané Wahbeh, Sitara Taddeo",
+    description: "A case study examining whether a structured hypnotic protocol can reliably induce trance channeling, suggesting that the capacity may be both trainable and linked to out-of-body states.",
+    url: "",
+  },
+  {
+    title: "Reports of Non-Physical Beings Assisting in Reiki Sessions",
+    journal: "Anthropology of Consciousness",
+    date: "August 2025",
+    coauthors: "Helané Wahbeh, Juliette Gallo, Garret Yount",
+    description: "A mixed-methods study of Reiki sessions investigating reports of non-physical entities and their perceived influence on healing processes.",
+    url: "",
+  },
+  {
+    title: "Reports of Non-Physical Beings Assisting in Reiki Sessions",
+    journal: "Journal of Scientific Exploration (forthcoming)",
+    date: "2026",
+    coauthors: "Helané Wahbeh, Erik Brinsmead, Sitara Taddeo, Ryan S. Wood",
+    description: "A computational analysis comparing trance-channeled ET communications with a 750,000-page ufological archive, identifying striking areas of thematic convergence and divergence across independent sources.",
+    url: "",
+  },
+];
+---
+
+<BaseLayout title="Publications" description="Academic publications by Beth H. Glick on consciousness, perception, and anomalous experience.">
+  <section class="max-w-3xl mx-auto px-6 pt-16 pb-12 md:pt-24">
+    <h1 class="font-serif text-3xl text-stone-800 mb-6">Publications</h1>
+
+    <p class="text-stone-600 leading-relaxed mb-12">
+      My work examines the limits of current models of perception and meaning, and how a broader account of human experience can open new ways of being, behaving, and engaging with what is possible in the world.
+    </p>
+
+    <div class="space-y-10">
+      {publications.map(pub => (
+        <article class="border-b border-stone-200 pb-8 last:border-0">
+          <h2 class="font-serif text-lg text-stone-800 mb-1">{pub.title}</h2>
+          <p class="text-sm text-stone-500 mb-1">
+            <span class="italic">{pub.journal}</span>, {pub.date}
+          </p>
+          <p class="text-sm text-stone-400 mb-3">{pub.coauthors}</p>
+          <p class="text-sm text-stone-600 mb-3">{pub.description}</p>
+          {pub.url ? (
+            <a
+              href={pub.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm text-accent hover:text-stone-800 transition-colors underline underline-offset-2"
+            >
+              Read here
+            </a>
+          ) : (
+            <span class="text-sm text-stone-400 italic">Link coming soon</span>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

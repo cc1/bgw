@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
-import { researchArticles } from '../data/research-articles';
+import { fetchResearchArticles } from '../data/research-articles';
 import { url } from '../utils/paths';
+
+const researchArticles = await fetchResearchArticles();
 ---
 
 <BaseLayout title="Research" description="Beth Glick's research exploring consciousness, extended human capacities, synchronicities, and mystical experiences.">

@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
-import { researchArticles } from '../data/research-articles';
+import { fetchResearchArticles } from '../data/research-articles';
 import { getCollection } from 'astro:content';
 import { url } from '../utils/paths';
+
+const researchArticles = await fetchResearchArticles();
 
 const orgArticles = await getCollection('organizations');
 const recentResearch = researchArticles.slice(0, 3);

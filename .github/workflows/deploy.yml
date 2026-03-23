@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    # Rebuild weekly on Mondays at 8am UTC to pick up new Substack posts
+    - cron: '0 8 * * 1'
   workflow_dispatch:
 
 permissions:

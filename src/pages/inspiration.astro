@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const photos = [
+  { src: "/images/gallery/krabi-thailand.jpg", location: "Krabi, Thailand" },
+  { src: "/images/gallery/chiang-dao-thailand-1.jpg", location: "Chiang Dao, Thailand" },
+  { src: "/images/gallery/chiang-dao-thailand-2.jpg", location: "Chiang Dao, Thailand" },
+  { src: "/images/gallery/mae-taeng-thailand-1.jpg", location: "Mae Taeng, Thailand" },
+  { src: "/images/gallery/mae-taeng-thailand-2.jpg", location: "Mae Taeng, Thailand" },
+  { src: "/images/gallery/hue-vietnam.jpg", location: "Hue, Vietnam" },
+  { src: "/images/gallery/sigiriya-sri-lanka.jpg", location: "Sigiriya, Sri Lanka" },
+  { src: "/images/gallery/jaffna-sri-lanka.jpg", location: "Jaffna, Sri Lanka" },
+  { src: "/images/gallery/florence-italy-1.jpg", location: "Florence, Italy" },
+  { src: "/images/gallery/florence-italy-2.jpg", location: "Florence, Italy" },
+  { src: "/images/gallery/peccioli-italy.jpg", location: "Peccioli, Italy" },
+  { src: "/images/gallery/rome-italy-1.jpg", location: "Rome, Italy" },
+  { src: "/images/gallery/rome-italy-2.jpg", location: "Rome, Italy" },
+  { src: "/images/gallery/orcas-island-usa.jpg", location: "Orcas Island, USA" },
+];
+---
+
+<BaseLayout title="Inspiration" description="Travel photography from Beth Glick's journeys around the world.">
+  <section class="max-w-5xl mx-auto px-6 pt-16 pb-12 md:pt-24">
+    <h1 class="font-serif text-3xl text-stone-800 mb-12">Inspiration</h1>
+
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+      {photos.map(photo => (
+        <div class="break-inside-avoid group">
+          <button
+            class="w-full text-left cursor-zoom-in"
+            data-lightbox-src={photo.src}
+            data-lightbox-caption={photo.location}
+          >
+            <div class="rounded-xl overflow-hidden bg-stone-200">
+              <img
+                src={photo.src}
+                alt={photo.location}
+                class="w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <p class="text-xs text-stone-400 mt-2 tracking-wide">{photo.location}</p>
+          </button>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Lightbox modal -->
+  <div
+    id="lightbox"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm"
+    role="dialog"
+    aria-modal="true"
+  >
+    <button
+      id="lightbox-close"
+      class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors p-2"
+      aria-label="Close"
+    >
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <div class="max-w-4xl max-h-[90vh] mx-4 flex flex-col items-center">
+      <img
+        id="lightbox-img"
+        src=""
+        alt=""
+        class="max-w-full max-h-[80vh] object-contain rounded-lg"
+      />
+      <p id="lightbox-caption" class="text-white/70 text-sm mt-3 tracking-wide"></p>
+    </div>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox')!;
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lightboxCaption = document.getElementById('lightbox-caption')!;
+    const lightboxClose = document.getElementById('lightbox-close')!;
+
+    // Open lightbox
+    document.querySelectorAll('[data-lightbox-src]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = btn.getAttribute('data-lightbox-src')!;
+        const caption = btn.getAttribute('data-lightbox-caption')!;
+        lightboxImg.src = src;
+        lightboxImg.alt = caption;
+        lightboxCaption.textContent = caption;
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Close lightbox
+    function closeLightbox() {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</BaseLayout>

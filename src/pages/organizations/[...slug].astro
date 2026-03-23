@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('organizations');
+  return articles.map(article => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+const formattedDate = new Date(article.data.date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={article.data.title} description={article.data.excerpt}>
+  <article class="max-w-3xl mx-auto px-6 pt-16 pb-12 md:pt-24">
+    <a href="/organizations" class="text-sm text-stone-400 hover:text-stone-600 transition-colors mb-8 inline-block">
+      &larr; Back to Organizations
+    </a>
+
+    {article.data.image && (
+      <div class="w-full h-64 md:h-80 rounded-xl overflow-hidden bg-stone-200 mb-8">
+        <img
+          src={article.data.image}
+          alt={article.data.title}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    )}
+
+    <time class="text-xs text-stone-400 uppercase tracking-wider">{formattedDate}</time>
+    <h1 class="font-serif text-3xl md:text-4xl text-stone-800 mt-2 mb-8">{article.data.title}</h1>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

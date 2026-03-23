@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  excerpt: string;
+  image?: string;
+  href: string;
+  external?: boolean;
+}
+
+const { title, date, excerpt, image, href, external = false } = Astro.props;
+
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<a
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  class="group block"
+>
+  <article class="flex flex-col sm:flex-row gap-5">
+    {image && (
+      <div class="sm:w-48 sm:h-32 flex-shrink-0 overflow-hidden rounded-lg bg-stone-100">
+        <img
+          src={image}
+          alt={title}
+          class="w-full h-48 sm:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
+    )}
+    <div class="flex-1 min-w-0">
+      <time class="text-xs text-stone-400 uppercase tracking-wider">{formattedDate}</time>
+      <h3 class="font-serif text-lg font-medium text-stone-800 mt-1 group-hover:text-accent transition-colors">
+        {title}
+        {external && (
+          <svg class="inline-block w-3.5 h-3.5 ml-1 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        )}
+      </h3>
+      <p class="text-sm text-stone-500 mt-2 line-clamp-2">{excerpt}</p>
+    </div>
+  </article>
+</a>

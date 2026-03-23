@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('organizations');
+const sortedArticles = articles.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout title="Organizations" description="Beth Glick partners with organizations globally to deepen impact, optimize design, and enliven culture.">
+  <section class="max-w-3xl mx-auto px-6 pt-16 pb-12 md:pt-24">
+    <!-- Hero image -->
+    <div class="w-full h-64 md:h-80 rounded-xl overflow-hidden bg-stone-200 mb-12">
+      <img
+        src="/images/hero/organizations-hero.jpg"
+        alt="Organizations"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <h1 class="font-serif text-3xl text-stone-800 mb-4">Organizational Design + Strategy</h1>
+
+    <div class="prose mb-12">
+      <p>
+        From 2010-2023, I co-founded and co-led ChangeCraft, a global consulting practice that worked with philanthropic, public, and nonprofit organizations trying to make the world more just, peaceful, and sustainable for future generations.
+      </p>
+
+      <p class="text-sm text-stone-500 italic">
+        Co- and distributed-leadership models, trust and transparency in the workplace, rethinking power in philanthropy, feminist and anti-racist contributions to emerging forms of organizational design.
+      </p>
+    </div>
+
+    <!-- Service offerings -->
+    <div class="grid md:grid-cols-3 gap-6 mb-16">
+      <div class="p-5 rounded-xl bg-stone-100">
+        <h3 class="font-serif text-lg text-stone-800 mb-2">Adaptive strategy</h3>
+        <p class="text-sm text-stone-600">Create a navigational system built for relevance and revision.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-stone-100">
+        <h3 class="font-serif text-lg text-stone-800 mb-2">Organizational design</h3>
+        <p class="text-sm text-stone-600">Design roles and structures that can adapt to shifting contexts and position teams with the autonomy to run with their ideas.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-stone-100">
+        <h3 class="font-serif text-lg text-stone-800 mb-2">Thriving culture</h3>
+        <p class="text-sm text-stone-600">Build an organization where the work experience is gratifying, vitalizing, growth-inducing, and even joyful.</p>
+      </div>
+    </div>
+
+    <!-- Client logos -->
+    <div class="mb-16">
+      <p class="text-xs text-stone-400 uppercase tracking-wider mb-6">Select clients</p>
+      <div class="flex flex-wrap items-center gap-8 grayscale opacity-50">
+        <img src="/images/logos/ignite-philanthropy.jpg" alt="Ignite Philanthropy" class="h-10 w-auto object-contain" />
+        <img src="/images/logos/houssian-foundation.jpg" alt="Houssian Foundation" class="h-10 w-auto object-contain" />
+        <img src="/images/logos/project-overzero.jpg" alt="Project OverZero" class="h-10 w-auto object-contain" />
+        <img src="/images/logos/sfu.png" alt="Simon Fraser University" class="h-10 w-auto object-contain" />
+        <img src="/images/logos/psfg.png" alt="Peace and Security Funders Group" class="h-10 w-auto object-contain" />
+        <img src="/images/logos/macarthur.png" alt="MacArthur Foundation" class="h-10 w-auto object-contain" />
+        <img src="/images/logos/oak-foundation.png" alt="Oak Foundation" class="h-10 w-auto object-contain" />
+      </div>
+    </div>
+
+    <!-- Articles -->
+    <h2 class="font-serif text-xl text-stone-800 mb-8">Writings</h2>
+    <div class="space-y-10">
+      {sortedArticles.map(article => (
+        <ArticleCard
+          title={article.data.title}
+          date={article.data.date}
+          excerpt={article.data.excerpt}
+          image={article.data.image}
+          href={`/organizations/${article.id}`}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

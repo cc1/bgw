@@ -48,24 +48,25 @@ const publications = [
     <div class="space-y-10">
       {publications.map(pub => (
         <article class="border-b border-stone-200 pb-8 last:border-0">
-          <h2 class="font-serif text-lg text-stone-800 mb-1">{pub.title}</h2>
+          {pub.url ? (
+            <h2 class="font-serif text-lg mb-1">
+              <a
+                href={pub.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-stone-800 hover:text-accent transition-colors underline underline-offset-2 decoration-stone-300 hover:decoration-accent"
+              >
+                {pub.title}
+              </a>
+            </h2>
+          ) : (
+            <h2 class="font-serif text-lg text-stone-800 mb-1">{pub.title}</h2>
+          )}
           <p class="text-sm text-stone-500 mb-1">
             <span class="italic">{pub.journal}</span>, {pub.date}
           </p>
           <p class="text-sm text-stone-400 mb-3">{pub.coauthors}</p>
-          <p class="text-sm text-stone-600 mb-3">{pub.description}</p>
-          {pub.url ? (
-            <a
-              href={pub.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-sm text-accent hover:text-stone-800 transition-colors underline underline-offset-2"
-            >
-              Read here
-            </a>
-          ) : (
-            <span class="text-sm text-stone-400 italic">Link coming soon</span>
-          )}
+          <p class="text-sm text-stone-600">{pub.description}</p>
         </article>
       ))}
     </div>

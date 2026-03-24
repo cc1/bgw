@@ -45,11 +45,11 @@ const publications = [
       My work examines the limits of current models of perception and meaning, and how a broader account of human experience can open new ways of being, behaving, and engaging with what is possible in the world.
     </p>
 
-    <div class="space-y-10">
+    <div class="space-y-8">
       {publications.map(pub => (
         <article class="border-b border-stone-200 pb-8 last:border-0">
           {pub.url ? (
-            <h2 class="font-serif text-lg mb-1">
+            <h2 class="text-base font-medium mb-1">
               <a
                 href={pub.url}
                 target="_blank"
@@ -60,10 +60,10 @@ const publications = [
               </a>
             </h2>
           ) : (
-            <h2 class="font-serif text-lg text-stone-800 mb-1">{pub.title}</h2>
+            <h2 class="text-base font-medium text-stone-800 mb-1">{pub.title}</h2>
           )}
           <p class="text-sm text-stone-500 mb-1">
-            <span class="italic">{pub.journal}</span>, {pub.date}
+            {pub.journal}, {pub.date}
           </p>
           <p class="text-sm text-stone-400 mb-3">{pub.coauthors}</p>
           <p class="text-sm text-stone-600">{pub.description}</p>

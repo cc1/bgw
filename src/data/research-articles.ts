@@ -103,6 +103,20 @@ export async function fetchResearchArticles(): Promise<ResearchArticle[]> {
 // Hardcoded fallback — used if RSS fetch fails (e.g. network issues in CI)
 const FALLBACK_ARTICLES: ResearchArticle[] = [
   {
+    title: "Kindling Mystery",
+    date: "2026-01-29",
+    excerpt: "On studying consciousness without extinguishing wonder.",
+    image: "/images/articles/what-is-intuition.jpg",
+    substackUrl: "https://intointuition.substack.com/p/kindling-mystery",
+  },
+  {
+    title: "Published!",
+    date: "2026-01-16",
+    excerpt: "Sharing the news of a first academic publication in the Journal of Consciousness Studies.",
+    image: "/images/articles/what-is-intuition.jpg",
+    substackUrl: "https://intointuition.substack.com/p/published",
+  },
+  {
     title: "What Conflict Is Teaching Me About Consciousness",
     date: "2025-05-14",
     excerpt: "The choice is ours: to dismiss what doesn\u2019t fit\u2014labeling it pathological, unscientific, or fringe\u2014or to stay open, curious, and willing to listen to what these experiences might reveal.",
@@ -136,6 +150,13 @@ const FALLBACK_ARTICLES: ResearchArticle[] = [
     excerpt: "I am no longer tethered to intuition, not because it does not interest me, but because I see it within a shared space of bridges or thresholds.",
     image: "/images/articles/phd-update.jpg",
     substackUrl: "https://intointuition.substack.com/p/nine-months-into-my-phd-journeyan",
+  },
+  {
+    title: "Wintering, Taking in the View",
+    date: "2024-01-18",
+    excerpt: "A quieter reflection on the season of stillness and what emerges when we pause.",
+    image: "/images/articles/what-is-intuition.jpg",
+    substackUrl: "https://intointuition.substack.com/p/wintering-taking-in-the-view",
   },
   {
     title: "Spaciousness",

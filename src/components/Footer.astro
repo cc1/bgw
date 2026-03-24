@@ -1,8 +1,16 @@
 ---
+import { url } from '../utils/paths';
 ---
 
-<footer class="border-t border-stone-200 mt-20">
-  <div class="max-w-5xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+<footer class="border-t border-stone-200 mt-20 relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img
+      src={url("/images/bioluminescence.webp")}
+      alt=""
+      class="w-full h-full object-cover opacity-15"
+    />
+  </div>
+  <div class="max-w-5xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
     <p class="text-sm text-stone-400">
       &copy; {new Date().getFullYear()} Beth H. Glick
     </p>

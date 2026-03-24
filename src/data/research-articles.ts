@@ -51,7 +51,13 @@ function stripHtml(html: string): string {
 
 function extractImageFromContent(content: string): string | null {
   const match = content.match(/<img[^>]+src="([^"]+)"/);
-  return match ? match[1] : null;
+  if (!match) return null;
+  // Extract the raw S3 URL from Substack's CDN wrapper to avoid broken $s_ tokens
+  const s3Match = match[1].match(/https%3A%2F%2Fsubstack-post-media\.s3\.amazonaws\.com[^"&)]+/);
+  if (s3Match) {
+    return decodeURIComponent(s3Match[0]);
+  }
+  return match[1];
 }
 
 export async function fetchResearchArticles(): Promise<ResearchArticle[]> {

@@ -65,7 +65,9 @@ function extractImageFromContent(content: string): string | null {
 
 export async function fetchResearchArticles(): Promise<ResearchArticle[]> {
   try {
-    const response = await fetch("https://intointuition.substack.com/feed");
+    const response = await fetch("https://intointuition.substack.com/feed", {
+      headers: { "User-Agent": "BethGlickSite/1.0" },
+    });
     const xml = await response.text();
 
     const articles: ResearchArticle[] = [];

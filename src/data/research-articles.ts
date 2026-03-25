@@ -12,12 +12,15 @@ const FALLBACK_IMAGE = "/images/articles/what-is-intuition.jpg";
 // Local image overrides for posts we already have downloaded images for.
 // Key is a slug derived from the Substack URL path.
 const LOCAL_IMAGES: Record<string, string> = {
+  "kindling-mystery": "/images/articles/kindling-mystery.jpg",
+  "published": "/images/articles/published.jpg",
   "what-conflict-is-teaching-me-about": "/images/articles/conflict-consciousness.jpg",
   "the-telepathy-tapes-and-the-trap": "/images/articles/telepathy-tapes.jpg",
   "why-cant-i-see-the-jellyfish": "/images/articles/jellyfish.jpg",
   "trauma-doesnt-make-it-less-real": "/images/articles/trauma.jpg",
   "nine-months-into-my-phd-journeyan": "/images/articles/phd-update.jpg",
   "spaciousness": "/images/articles/spaciousness.jpg",
+  "wintering-taking-in-the-view": "/images/articles/wintering.jpg",
   "an-unlikely-pairing-intention-letting": "/images/articles/intention.jpg",
   "intuition-neither-divine-nor-mundane": "/images/articles/divine-mundane.jpg",
   "what-is-intuition": "/images/articles/what-is-intuition.jpg",
@@ -112,14 +115,14 @@ const FALLBACK_ARTICLES: ResearchArticle[] = [
     title: "Kindling Mystery",
     date: "2026-01-29",
     excerpt: "On studying consciousness without extinguishing wonder.",
-    image: "/images/articles/what-is-intuition.jpg",
+    image: "/images/articles/kindling-mystery.jpg",
     substackUrl: "https://intointuition.substack.com/p/kindling-mystery",
   },
   {
     title: "Published!",
     date: "2026-01-16",
     excerpt: "Sharing the news of a first academic publication in the Journal of Consciousness Studies.",
-    image: "/images/articles/what-is-intuition.jpg",
+    image: "/images/articles/published.jpg",
     substackUrl: "https://intointuition.substack.com/p/published",
   },
   {
@@ -161,7 +164,7 @@ const FALLBACK_ARTICLES: ResearchArticle[] = [
     title: "Wintering, Taking in the View",
     date: "2024-01-18",
     excerpt: "A quieter reflection on the season of stillness and what emerges when we pause.",
-    image: "/images/articles/what-is-intuition.jpg",
+    image: "/images/articles/wintering.jpg",
     substackUrl: "https://intointuition.substack.com/p/wintering-taking-in-the-view",
   },
   {

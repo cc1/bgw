@@ -2,12 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NewsletterSignup from '../components/NewsletterSignup.astro';
 
-// FormSubmit: plain-email URL for progressive-enhancement fallback (works
-// with JS disabled). Swap both URLs to the hashed alias
-// (https://formsubmit.co/el/xxxxxx and .../ajax/el/xxxxxx) after Beth
-// verifies the form with her first submission.
-const formAction = 'https://formsubmit.co/bethglick@gmail.com';
-const formAjaxEndpoint = 'https://formsubmit.co/ajax/bethglick@gmail.com';
+// FormSubmit hashed alias — resolves to bethglick@gmail.com on FormSubmit's
+// side, keeping the raw address out of the page source.
+const formAction = 'https://formsubmit.co/3451323c4f2ef5e5f972914e7ff447de';
+const formAjaxEndpoint = 'https://formsubmit.co/ajax/3451323c4f2ef5e5f972914e7ff447de';
 
 const subjectOptions = [
   'Speaking inquiry',

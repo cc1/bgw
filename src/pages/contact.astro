@@ -114,7 +114,19 @@ const subjectOptions = [
   if (!form || !submitBtn || !errorEl || !successEl) throw new Error('Contact form elements missing');
 
   const ajaxEndpoint = form.dataset.ajaxEndpoint || form.action;
-  const fallbackError = 'Something went wrong. Please email bethglick@gmail.com directly.';
+  const fallbackError = "Something went wrong — please try again in a moment.";
+
+  // Pre-select Subject from query param (e.g., /contact?subject=speaking).
+  const subjectMap: Record<string, string> = {
+    speaking: 'Speaking inquiry',
+    advisory: 'Advisory / consulting',
+    research: 'Research collaboration',
+  };
+  const subjectSlug = new URLSearchParams(location.search).get('subject');
+  if (subjectSlug && subjectMap[subjectSlug]) {
+    const select = document.getElementById('subject') as HTMLSelectElement | null;
+    if (select) select.value = subjectMap[subjectSlug];
+  }
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();

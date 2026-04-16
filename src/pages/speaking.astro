@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { url } from '../utils/paths';
 
 const talks = [
   {
@@ -62,7 +63,7 @@ const downloadables = [
         <p class="text-sm text-stone-500 mt-1">Keynotes, panels, podcasts, private convenings.</p>
       </div>
       <a
-        href="mailto:bethglick@gmail.com?subject=Speaking%20inquiry"
+        href={url("/contact?subject=speaking")}
         class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-800 text-white text-sm rounded-lg hover:bg-stone-700 transition-colors flex-shrink-0"
       >
         Get in touch

@@ -25,14 +25,6 @@ const talks = [
   },
 ];
 
-// Downloadables — files do not exist yet. When assets arrive, drop them in
-// public/downloads/ and set the href on each entry.
-const downloadables = [
-  { label: "Short bio", href: null },
-  { label: "Long bio", href: null },
-  { label: "High-res headshot", href: null },
-  { label: "One-sheet", href: null },
-];
 ---
 
 <BaseLayout title="Speaking" description="Beth Glick speaks to leaders, researchers, and curious audiences on consciousness, the edges of perception, and the paradigm shifts already under way.">
@@ -70,34 +62,5 @@ const downloadables = [
       </a>
     </div>
 
-    <!-- Downloadables -->
-    <h2 class="font-serif text-xl text-stone-800 mb-6">For Event Producers</h2>
-    <ul class="grid sm:grid-cols-2 gap-3 mb-8">
-      {downloadables.map(item => (
-        <li>
-          {item.href ? (
-            <a
-              href={item.href}
-              class="flex items-center gap-3 px-4 py-3 border border-stone-200 rounded-lg text-sm text-stone-700 hover:border-accent hover:text-accent transition-colors"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
-              </svg>
-              {item.label}
-            </a>
-          ) : (
-            <span class="flex items-center justify-between gap-3 px-4 py-3 border border-stone-200 rounded-lg text-sm text-stone-400 cursor-not-allowed">
-              <span class="flex items-center gap-3">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
-                </svg>
-                {item.label}
-              </span>
-              <span class="text-xs uppercase tracking-wider">Coming soon</span>
-            </span>
-          )}
-        </li>
-      ))}
-    </ul>
   </section>
 </BaseLayout>

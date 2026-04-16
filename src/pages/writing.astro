@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { fetchResearchArticles } from '../data/research-articles';
+import { url } from '../utils/paths';
+
+const researchArticles = await fetchResearchArticles();
+
+// Selected Essays: defaults to the 4 most recent. Swap to a curated
+// ordered list of Substack slugs to override.
+const curatedSlugs: string[] = [];
+const bySlug = (slug: string) =>
+  researchArticles.find(a => a.substackUrl.endsWith(`/p/${slug}`));
+const selectedEssays = curatedSlugs.length
+  ? curatedSlugs.map(bySlug).filter((a): a is NonNullable<typeof a> => !!a)
+  : researchArticles.slice(0, 4);
+---
+
+<BaseLayout title="Writing" description="Beth Glick's essays on consciousness, anomalous phenomena, and the edges of perception.">
+  <section class="max-w-3xl mx-auto px-6 pt-16 pb-12 md:pt-24">
+    <h1 class="font-serif text-3xl text-stone-800 mb-6">Writing</h1>
+
+    <p class="text-stone-600 leading-relaxed mb-12 max-w-2xl">
+      Essays on consciousness, anomalous phenomena, and what they reveal about how we relate, lead, and make meaning. Published on <a href="https://intointuition.substack.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 decoration-stone-300 hover:decoration-accent text-stone-700 hover:text-accent transition-colors">Into Intuition</a>.
+    </p>
+
+    <!-- Selected Essays -->
+    <h2 class="font-serif text-xl text-stone-800 mb-8">Selected Essays</h2>
+    <div class="grid sm:grid-cols-2 gap-10 mb-20">
+      {selectedEssays.map(article => (
+        <a
+          href={article.substackUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group block"
+        >
+          <div class="aspect-[4/3] overflow-hidden rounded-lg bg-stone-100 mb-4">
+            <img
+              src={url(article.image)}
+              alt={article.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </div>
+          <time class="text-xs text-stone-400 uppercase tracking-wider">
+            {new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          <h3 class="font-serif text-xl font-medium text-stone-800 mt-1 group-hover:text-accent transition-colors">
+            {article.title}
+          </h3>
+          <p class="text-sm text-stone-500 mt-2">{article.excerpt}</p>
+        </a>
+      ))}
+    </div>
+
+    <!-- Archive -->
+    <h2 class="font-serif text-xl text-stone-800 mb-8">Archive</h2>
+    <div class="space-y-10">
+      {researchArticles.map(article => (
+        <ArticleCard
+          title={article.title}
+          date={article.date}
+          excerpt={article.excerpt}
+          image={url(article.image)}
+          href={article.substackUrl}
+          external={true}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

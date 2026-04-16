@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import { url } from '../../utils/paths';
+
+const articles = await getCollection('field-work');
+const sortedArticles = articles.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout title="Field Work" description="Beth Glick works where new paradigms are trying to form, mature, and cross into legitimacy without losing themselves in the crossing.">
+  <section class="max-w-3xl mx-auto px-6 pt-16 pb-12 md:pt-24">
+    <h1 class="font-serif text-3xl text-stone-800 mb-8">Field Work</h1>
+
+    <div class="prose mb-16">
+      <p class="font-medium">
+        I work where new paradigms are trying to form, mature, and cross into legitimacy without losing themselves in the crossing.
+      </p>
+
+      <p>
+        A paradigm that takes consciousness seriously as fundamental rather than incidental. That treats intuitive, contemplative, and non-ordinary ways of knowing as legitimate sources of evidence. That holds space for experiences our current frameworks filter out: synchronicities, mystical states, extended perception, contact, healing at a distance. And that asks what institutions, research, and leadership look like when built on these foundations rather than in spite of them.
+      </p>
+    </div>
+
+    <h2 class="font-serif text-2xl text-stone-800 mb-4">How I Engage</h2>
+    <div class="prose mb-16">
+      <p>
+        My attention is on how we come together in this territory. How fields present themselves: what they claim, what they refuse, what they protect. How the work stays faithful to the worldview it points toward. How bridges to philanthropy, academia, media, and leadership get built without flattening what matters.
+      </p>
+
+      <p>
+        I work across levels: with individual leaders, with organizations shaping how they operate from the inside, with fields and communities of practice finding their form, and with mainstream institutions seeking credible entry points. The mode, whether advisory, convening, partnership, or strategic counsel, takes shape case by case. I am available for engagements from strategic counsel at the leadership level to deeper work on how an organization operates, perceives, and convenes.
+      </p>
+    </div>
+
+    <h2 class="font-serif text-2xl text-stone-800 mb-4">Foundation</h2>
+    <div class="prose mb-10">
+      <p>
+        This work draws on nearly two decades of organizational strategy, design, and culture practice, including ChangeCraft, the global consulting firm I co-founded and co-led from 2010 to 2023. That practice sharpened everything I now bring to questions of how fields form and paradigms take hold.
+      </p>
+    </div>
+
+    <!-- Select Clients -->
+    <div class="mb-16">
+      <p class="text-xs text-stone-400 uppercase tracking-wider mb-6">Select clients</p>
+      <div class="flex flex-wrap items-center gap-10">
+        <img src={url("/images/logos/ignite-philanthropy.jpg")} alt="Ignite Philanthropy" class="h-16 w-auto object-contain opacity-80" />
+        <img src={url("/images/logos/houssian-foundation.jpg")} alt="Houssian Foundation" class="h-16 w-auto object-contain opacity-80" />
+        <img src={url("/images/logos/project-overzero.jpg")} alt="Project OverZero" class="h-16 w-auto object-contain opacity-80" />
+        <img src={url("/images/logos/oak-foundation.png")} alt="Oak Foundation" class="h-16 w-auto object-contain opacity-80" />
+        <img src={url("/images/logos/sfu.png")} alt="Simon Fraser University" class="h-16 w-auto object-contain opacity-80" />
+        <img src={url("/images/logos/psfg.png")} alt="Peace and Security Funders Group" class="h-16 w-auto object-contain opacity-80" />
+        <img src={url("/images/logos/macarthur.png")} alt="MacArthur Foundation" class="h-16 w-auto object-contain opacity-80" />
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-stone-100 rounded-xl px-6 py-8 mb-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <p class="font-serif text-lg text-stone-800">Explore working together</p>
+        <p class="text-sm text-stone-500 mt-1">Advisory, convening, partnership, or strategic counsel.</p>
+      </div>
+      <a
+        href="mailto:bethglick@gmail.com?subject=Field%20Work%20inquiry"
+        class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-800 text-white text-sm rounded-lg hover:bg-stone-700 transition-colors flex-shrink-0"
+      >
+        Get in touch
+      </a>
+    </div>
+
+    <!-- Writing on Organizations -->
+    <h2 class="font-serif text-2xl text-stone-800 mb-8">Writing on Organizations</h2>
+    <div class="space-y-10">
+      {sortedArticles.map(article => (
+        <ArticleCard
+          title={article.data.title}
+          date={article.data.date}
+          excerpt={article.data.excerpt}
+          image={url(article.data.image || '')}
+          href={url(`/field-work/${article.id}`)}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

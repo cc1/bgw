@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const talks = [
+  {
+    number: "01",
+    title: "The Provocation",
+    body: "AI is getting better at everything we thought made us special. What if that's not a threat but an invitation? The future human isn't augmented. It's both uncovered and expanded. We are recovering capacities modernity trained us out of, intuitive knowing, participatory perception, the ability to hold multiple frames without collapsing them, and at the same time moving into territory we have never occupied before. Grounded in two decades of international conflict-resolution work, contemplative traditions, and emerging consciousness research, the claim is simple: the expanded human is not a futurist fantasy. It is what happens when we recover what was buried and go deeper simultaneously.",
+  },
+  {
+    number: "02",
+    title: "Beyond the Party Trick: Ethics and the Anomalous",
+    body: "We are professionalizing a field that studies lives changed by the inexplicable. We had better know what we are doing. Extraordinary experiences can crack a life open toward compassion, service, and depth. They can also produce predators, cult leaders, and unchecked certainty. What determines which path someone takes? Ethics is not an add-on to this research; it is embedded in every methodological choice. Rooted in doctoral work investigating what shapes the difference between transformation and inflation.",
+  },
+  {
+    number: "03",
+    title: "How to Say I Don't Know",
+    body: "The opposite of certainty isn't ignorance. It's wonder. Somewhere in the last three centuries we conflated certainty with intelligence and wonder with naïveté. The cost of that mistake is surfacing across mental health, institutional trust, and our capacity to meet what is already happening in front of us. Wonder, reclaimed as a trained practice, for individuals and cultures in a moment that needs one.",
+  },
+  {
+    number: "04",
+    title: "Agency After the Extraordinary",
+    body: "You are neither a machine running its program nor the sovereign author of your life. Both stories are wrong; a third one fits the evidence better. Built on peer-reviewed research into transformation following near-death, contact, and mystical experiences, this talk reframes agency as participatory responsiveness: real, relational, authored, but not autonomous.",
+  },
+];
+
+// Downloadables — files do not exist yet. When assets arrive, drop them in
+// public/downloads/ and set the href on each entry.
+const downloadables = [
+  { label: "Short bio", href: null },
+  { label: "Long bio", href: null },
+  { label: "High-res headshot", href: null },
+  { label: "One-sheet", href: null },
+];
+---
+
+<BaseLayout title="Speaking" description="Beth Glick speaks to leaders, researchers, and curious audiences on consciousness, the edges of perception, and the paradigm shifts already under way.">
+  <section class="max-w-3xl mx-auto px-6 pt-16 pb-12 md:pt-24">
+    <h1 class="font-serif text-3xl text-stone-800 mb-6">Speaking</h1>
+
+    <p class="text-stone-600 leading-relaxed mb-16 max-w-2xl">
+      I speak to leaders, researchers, and curious audiences on consciousness, the edges of perception, and the paradigm shifts already under way. Available for keynotes, panels, podcasts, and private convenings.
+    </p>
+
+    <!-- Signature Talks -->
+    <h2 class="font-serif text-2xl text-stone-800 mb-10">Signature Talks</h2>
+    <div class="space-y-12 mb-20">
+      {talks.map(talk => (
+        <article class="border-b border-stone-200 pb-12 last:border-0">
+          <p class="text-xs text-stone-400 uppercase tracking-wider mb-2">{talk.number}</p>
+          <h3 class="font-serif text-xl md:text-2xl text-stone-800 mb-4">{talk.title}</h3>
+          <p class="text-stone-600 leading-relaxed">{talk.body}</p>
+        </article>
+      ))}
+    </div>
+
+    <!-- Booking CTA -->
+    <div class="bg-stone-100 rounded-xl px-6 py-8 mb-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <p class="text-xs text-stone-400 uppercase tracking-wider mb-2">Now Booking</p>
+        <p class="font-serif text-lg text-stone-800">Invite Beth to speak</p>
+        <p class="text-sm text-stone-500 mt-1">Keynotes, panels, podcasts, private convenings.</p>
+      </div>
+      <a
+        href="mailto:bethglick@gmail.com?subject=Speaking%20inquiry"
+        class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-800 text-white text-sm rounded-lg hover:bg-stone-700 transition-colors flex-shrink-0"
+      >
+        Get in touch
+      </a>
+    </div>
+
+    <!-- Downloadables -->
+    <h2 class="font-serif text-xl text-stone-800 mb-6">For Event Producers</h2>
+    <ul class="grid sm:grid-cols-2 gap-3 mb-8">
+      {downloadables.map(item => (
+        <li>
+          {item.href ? (
+            <a
+              href={item.href}
+              class="flex items-center gap-3 px-4 py-3 border border-stone-200 rounded-lg text-sm text-stone-700 hover:border-accent hover:text-accent transition-colors"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
+              </svg>
+              {item.label}
+            </a>
+          ) : (
+            <span class="flex items-center justify-between gap-3 px-4 py-3 border border-stone-200 rounded-lg text-sm text-stone-400 cursor-not-allowed">
+              <span class="flex items-center gap-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
+                </svg>
+                {item.label}
+              </span>
+              <span class="text-xs uppercase tracking-wider">Coming soon</span>
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

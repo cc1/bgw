@@ -7,16 +7,15 @@ const { currentPath } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const links = [
-  { href: `${base}/`, label: 'Home' },
   { href: `${base}/about`, label: 'About' },
-  { href: `${base}/ideas`, label: 'Ideas' },
-  { href: `${base}/publications`, label: 'Publications' },
-  { href: `${base}/organizations`, label: 'Organizations' },
-  { href: `${base}/inspiration`, label: 'Inspiration' },
+  { href: `${base}/writing`, label: 'Writing' },
+  { href: `${base}/research`, label: 'Research' },
+  { href: `${base}/field-work`, label: 'Field Work' },
+  { href: `${base}/speaking`, label: 'Speaking' },
+  { href: `${base}/contact`, label: 'Contact' },
 ];
 
 function isActive(href: string, current: string): boolean {
-  if (href === `${base}/`) return current === `${base}/`;
   return current.startsWith(href);
 }
 ---
@@ -29,7 +28,7 @@ function isActive(href: string, current: string): boolean {
 
     <!-- Desktop nav -->
     <ul class="hidden md:flex items-center gap-8">
-      {links.filter(l => l.href !== '/').map(link => (
+      {links.map(link => (
         <li>
           <a
             href={link.href}

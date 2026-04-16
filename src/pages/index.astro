@@ -1,16 +1,41 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ArticleCard from '../components/ArticleCard.astro';
-import { fetchResearchArticles } from '../data/research-articles';
 import { url } from '../utils/paths';
 
-const researchArticles = await fetchResearchArticles();
-const recentResearch = researchArticles.slice(0, 3);
+const selectedWriting = [
+  {
+    title: "What Conflict Is Teaching Me About Consciousness",
+    description: "What twenty years of working on the world's hardest problems taught me about the limits of how we see.",
+    image: "/images/articles/conflict-consciousness.jpg",
+    href: "https://intointuition.substack.com/p/what-conflict-is-teaching-me-about",
+  },
+  {
+    title: "Kindling Mystery",
+    description: "On studying consciousness without extinguishing wonder.",
+    image: "/images/articles/kindling-mystery.jpg",
+    href: "https://intointuition.substack.com/p/kindling-mystery",
+  },
+];
+
+const recentResearch = [
+  {
+    title: "Investigating Individual Intuitive Expression: Norms and Patterns in the Noetic Signature Inventory",
+    journal: "Journal of Consciousness Studies",
+    year: "2026",
+    href: "https://www.ingentaconnect.com/contentone/imp/jcs/2025/00000032/f0020011/art00005",
+  },
+  {
+    title: "Reports of Non-Physical Beings Assisting in Reiki Sessions",
+    journal: "Anthropology of Consciousness",
+    year: "2025",
+    href: "https://anthrosource.onlinelibrary.wiley.com/doi/10.1111/anoc.70009",
+  },
+];
 ---
 
 <BaseLayout title="Home">
   <!-- Hero -->
-  <section class="max-w-5xl mx-auto px-6 pt-16 pb-12 md:pt-24 md:pb-16">
+  <section class="max-w-5xl mx-auto px-6 pt-16 pb-16 md:pt-24 md:pb-20">
     <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
       <div class="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden flex-shrink-0 bg-stone-200">
         <img
@@ -23,39 +48,104 @@ const recentResearch = researchArticles.slice(0, 3);
         <h1 class="font-serif text-3xl md:text-4xl font-medium text-stone-800 mb-4">
           Beth H. Glick
         </h1>
-        <p class="text-lg text-stone-600 leading-relaxed max-w-xl">
-          Consciousness researcher &amp; organizational strategist
+        <p class="font-serif text-lg md:text-xl text-stone-700 leading-relaxed max-w-xl">
+          Researcher of consciousness and the edges of perception.
         </p>
-        <p class="text-base text-stone-500 italic leading-relaxed max-w-xl mt-2">
-          How we experience the world shapes how we act, relate, and create
+        <p class="font-serif text-lg md:text-xl text-stone-700 leading-relaxed max-w-xl">
+          Writer. Advisor. Field builder.
         </p>
-        <p class="text-base text-stone-500 italic leading-relaxed max-w-xl mt-1">
-          From everyday perception to extraordinary experience
+        <p class="text-sm text-stone-500 leading-relaxed max-w-xl mt-5">
+          Doctoral researcher, California Institute for Human Science &nbsp;·&nbsp; MTS, Harvard Divinity School &nbsp;·&nbsp; Co-founder, ChangeCraft
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Research -->
-  <section class="max-w-5xl mx-auto px-6 py-12 border-t border-stone-200">
-    <div class="flex items-center justify-between mb-8">
-      <h2 class="font-serif text-2xl text-stone-800">Ideas</h2>
-      <a href={url("/ideas")} class="text-sm text-stone-500 hover:text-stone-800 transition-colors">
-        View all &rarr;
+  <!-- Selected Writing -->
+  <section class="max-w-5xl mx-auto px-6 py-16 border-t border-stone-200">
+    <div class="flex items-end justify-between mb-10">
+      <h2 class="font-serif text-2xl text-stone-800">Selected Writing</h2>
+      <a href={url("/writing")} class="text-sm text-stone-500 hover:text-stone-800 transition-colors">
+        All essays &rarr;
       </a>
     </div>
-    <div class="space-y-8">
-      {recentResearch.map(article => (
-        <ArticleCard
-          title={article.title}
-          date={article.date}
-          excerpt={article.excerpt}
-          image={url(article.image)}
-          href={article.substackUrl}
-          external={true}
-        />
+    <div class="grid sm:grid-cols-2 gap-10">
+      {selectedWriting.map(article => (
+        <a
+          href={article.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group block"
+        >
+          <div class="aspect-[4/3] overflow-hidden rounded-lg bg-stone-100 mb-4">
+            <img
+              src={url(article.image)}
+              alt={article.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </div>
+          <h3 class="font-serif text-xl font-medium text-stone-800 group-hover:text-accent transition-colors">
+            {article.title}
+          </h3>
+          <p class="text-sm text-stone-500 italic mt-2">{article.description}</p>
+        </a>
       ))}
     </div>
   </section>
 
+  <!-- Recent Research -->
+  <section class="max-w-5xl mx-auto px-6 py-16 border-t border-stone-200">
+    <div class="flex items-end justify-between mb-10">
+      <h2 class="font-serif text-2xl text-stone-800">Recent Research</h2>
+      <a href={url("/research")} class="text-sm text-stone-500 hover:text-stone-800 transition-colors">
+        All publications &rarr;
+      </a>
+    </div>
+    <div class="space-y-8">
+      {recentResearch.map(pub => (
+        <article class="border-b border-stone-200 pb-8 last:border-0">
+          <h3 class="text-base font-medium mb-1">
+            <a
+              href={pub.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-stone-800 hover:text-accent transition-colors underline underline-offset-2 decoration-stone-300 hover:decoration-accent"
+            >
+              {pub.title}
+            </a>
+          </h3>
+          <p class="text-sm text-stone-500">
+            <span class="italic">{pub.journal}</span>, {pub.year}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTAs -->
+  <section class="max-w-5xl mx-auto px-6 py-16 border-t border-stone-200">
+    <div class="grid sm:grid-cols-2 gap-6">
+      <a
+        href={url("/speaking")}
+        class="group block p-8 rounded-xl bg-stone-100 hover:bg-stone-800 transition-colors"
+      >
+        <p class="text-xs text-stone-400 group-hover:text-stone-300 uppercase tracking-wider mb-3 transition-colors">Speaking</p>
+        <p class="font-serif text-xl text-stone-800 group-hover:text-white transition-colors">
+          Invite Beth to speak
+          <span class="inline-block ml-1 group-hover:translate-x-1 transition-transform">&rarr;</span>
+        </p>
+      </a>
+      <a
+        href={url("/field-work")}
+        class="group block p-8 rounded-xl bg-stone-100 hover:bg-stone-800 transition-colors"
+      >
+        <p class="text-xs text-stone-400 group-hover:text-stone-300 uppercase tracking-wider mb-3 transition-colors">Field Work</p>
+        <p class="font-serif text-xl text-stone-800 group-hover:text-white transition-colors">
+          Work together
+          <span class="inline-block ml-1 group-hover:translate-x-1 transition-transform">&rarr;</span>
+        </p>
+      </a>
+    </div>
+  </section>
 </BaseLayout>

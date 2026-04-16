@@ -86,7 +86,7 @@ export async function fetchResearchArticles(): Promise<ResearchArticle[]> {
 
       if (!titleMatch || !linkMatch) continue;
 
-      const title = stripHtml(titleMatch[1]);
+      const title = stripHtml(titleMatch[1]).replace(/!+$/, "");
       const url = linkMatch[1].trim();
       const slug = slugFromUrl(url);
       const date = dateMatch ? new Date(dateMatch[1].trim()).toISOString().split("T")[0] : "";
@@ -121,7 +121,7 @@ const FALLBACK_ARTICLES: ResearchArticle[] = [
     substackUrl: "https://intointuition.substack.com/p/kindling-mystery",
   },
   {
-    title: "Published!",
+    title: "Published",
     date: "2026-01-16",
     excerpt: "Sharing the news of a first academic publication in the Journal of Consciousness Studies.",
     image: "/images/articles/published.jpg",

@@ -4,7 +4,7 @@ import { getCollection, render } from 'astro:content';
 import { url } from '../../utils/paths';
 
 export async function getStaticPaths() {
-  const articles = await getCollection('organizations');
+  const articles = await getCollection('field-work');
   return articles.map(article => ({
     params: { slug: article.id },
     props: { article },
@@ -23,8 +23,8 @@ const formattedDate = new Date(article.data.date).toLocaleDateString('en-US', {
 
 <BaseLayout title={article.data.title} description={article.data.excerpt}>
   <article class="max-w-3xl mx-auto px-6 pt-16 pb-12 md:pt-24">
-    <a href={url("/organizations")} class="text-sm text-stone-400 hover:text-stone-600 transition-colors mb-8 inline-block">
-      &larr; Back to Organizations
+    <a href={url("/field-work")} class="text-sm text-stone-400 hover:text-stone-600 transition-colors mb-8 inline-block">
+      &larr; Back to Field Work
     </a>
 
     {article.data.image && (

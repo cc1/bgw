@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+
+// FormSubmit: plain-email URL for progressive-enhancement fallback (works
+// with JS disabled). Swap both URLs to the hashed alias
+// (https://formsubmit.co/el/xxxxxx and .../ajax/el/xxxxxx) after Beth
+// verifies the form with her first submission.
+const formAction = 'https://formsubmit.co/bethglick@gmail.com';
+const formAjaxEndpoint = 'https://formsubmit.co/ajax/bethglick@gmail.com';
+
+const subjectOptions = [
+  'Speaking inquiry',
+  'Advisory / consulting',
+  'Research collaboration',
+  'Other',
+];
+---
+
+<BaseLayout title="Contact" description="Get in touch with Beth Glick about speaking, advisory work, research collaboration, and media.">
+  <section class="max-w-3xl mx-auto px-6 pt-16 pb-12 md:pt-24">
+    <h1 class="font-serif text-3xl text-stone-800 mb-6">Get in Touch</h1>
+
+    <p class="text-stone-600 leading-relaxed mb-12 max-w-2xl">
+      I welcome inquiries about speaking, advisory work, research collaboration, and media.
+    </p>
+
+    <form
+      id="contact-form"
+      action={formAction}
+      method="POST"
+      data-ajax-endpoint={formAjaxEndpoint}
+      class="space-y-6 mb-20"
+    >
+      {/* FormSubmit hidden config */}
+      <input type="hidden" name="_subject" value="New message from bethglick.com" />
+      <input type="hidden" name="_autoresponse" value="Thank you for reaching out. I read every note and will be in touch." />
+      <input type="hidden" name="_template" value="box" />
+      <input type="hidden" name="_captcha" value="false" />
+      {/* Honeypot: bots fill this, humans don't. Kept visually hidden. */}
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+      <div>
+        <label for="name" class="block text-sm text-stone-600 mb-2">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="w-full px-3 py-2 rounded-md border border-stone-300 text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:border-accent"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm text-stone-600 mb-2">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="w-full px-3 py-2 rounded-md border border-stone-300 text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:border-accent"
+        />
+      </div>
+
+      <div>
+        <label for="subject" class="block text-sm text-stone-600 mb-2">Subject</label>
+        <select
+          id="subject"
+          name="subject"
+          required
+          class="w-full px-3 py-2 rounded-md border border-stone-300 text-sm text-stone-800 bg-white focus:outline-none focus:border-accent"
+        >
+          {subjectOptions.map(option => (
+            <option value={option}>{option}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm text-stone-600 mb-2">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows="6"
+          class="w-full px-3 py-2 rounded-md border border-stone-300 text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:border-accent"
+        ></textarea>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <button
+          id="contact-submit"
+          type="submit"
+          class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-800 text-white text-sm rounded-lg hover:bg-stone-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+        >
+          Send message
+        </button>
+        <p id="contact-error" class="hidden text-sm text-red-600" role="alert"></p>
+      </div>
+    </form>
+
+    <div id="contact-success" class="hidden mb-20 rounded-xl border border-stone-200 bg-stone-50 px-6 py-8" role="status">
+      <p class="font-serif text-lg text-stone-800">Thank you — your message is on its way.</p>
+      <p class="text-sm text-stone-500 mt-2">I read every note and will be in touch.</p>
+    </div>
+
+    <NewsletterSignup />
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
+  const errorEl = document.getElementById('contact-error');
+  const successEl = document.getElementById('contact-success');
+  if (!form || !submitBtn || !errorEl || !successEl) throw new Error('Contact form elements missing');
+
+  const ajaxEndpoint = form.dataset.ajaxEndpoint || form.action;
+  const fallbackError = 'Something went wrong. Please email bethglick@gmail.com directly.';
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    errorEl.classList.add('hidden');
+    errorEl.textContent = '';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(ajaxEndpoint, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) {
+        form.classList.add('hidden');
+        successEl.classList.remove('hidden');
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        form.reset();
+      } else {
+        errorEl.textContent = fallbackError;
+        errorEl.classList.remove('hidden');
+      }
+    } catch {
+      errorEl.textContent = fallbackError;
+      errorEl.classList.remove('hidden');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send message';
+    }
+  });
+</script>

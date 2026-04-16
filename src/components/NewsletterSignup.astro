@@ -1,0 +1,61 @@
+---
+interface Props {
+  variant?: 'default' | 'footer';
+}
+
+const { variant = 'default' } = Astro.props;
+
+// Form posts directly to Substack; the browser navigates to Substack's
+// confirmation flow on submit.
+const action = 'https://intointuition.substack.com/subscribe';
+---
+
+{variant === 'footer' ? (
+  <div class="text-stone-100">
+    <p class="font-serif text-base text-white mb-1">Subscribe to Into Intuition</p>
+    <p class="text-xs text-stone-300 mb-4 max-w-sm">
+      Writing on consciousness, anomalous phenomena, and what they mean for how we relate and lead.
+    </p>
+    <form action={action} method="post" class="flex flex-col sm:flex-row gap-2 max-w-sm">
+      <label class="sr-only" for="newsletter-email-footer">Email</label>
+      <input
+        id="newsletter-email-footer"
+        type="email"
+        name="email"
+        required
+        placeholder="you@example.com"
+        class="flex-1 px-3 py-2 rounded-md bg-white/10 border border-white/20 text-sm text-white placeholder-stone-300 focus:outline-none focus:bg-white/20 focus:border-white/40"
+      />
+      <button
+        type="submit"
+        class="px-4 py-2 bg-white text-stone-800 text-sm font-medium rounded-md hover:bg-stone-100 transition-colors"
+      >
+        Subscribe
+      </button>
+    </form>
+  </div>
+) : (
+  <div class="bg-stone-100 rounded-xl px-6 py-8">
+    <p class="font-serif text-lg text-stone-800 mb-1">Subscribe to Into Intuition</p>
+    <p class="text-sm text-stone-500 mb-5 max-w-md">
+      Writing on consciousness, anomalous phenomena, and what they mean for how we relate and lead.
+    </p>
+    <form action={action} method="post" class="flex flex-col sm:flex-row gap-2 max-w-md">
+      <label class="sr-only" for="newsletter-email">Email</label>
+      <input
+        id="newsletter-email"
+        type="email"
+        name="email"
+        required
+        placeholder="you@example.com"
+        class="flex-1 px-3 py-2 rounded-md border border-stone-300 text-sm text-stone-800 placeholder-stone-400 focus:outline-none focus:border-accent"
+      />
+      <button
+        type="submit"
+        class="px-4 py-2 bg-stone-800 text-white text-sm font-medium rounded-md hover:bg-stone-700 transition-colors"
+      >
+        Subscribe
+      </button>
+    </form>
+  </div>
+)}

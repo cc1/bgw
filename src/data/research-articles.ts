@@ -45,6 +45,7 @@ function stripHtml(html: string): string {
     .replace(/&#8221;/g, "\u201d")
     .replace(/&#8212;/g, "\u2014")
     .replace(/&#8211;/g, "\u2013")
+    .replace(/&#8230;/g, "\u2026")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")

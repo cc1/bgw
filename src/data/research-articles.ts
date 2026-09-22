@@ -12,6 +12,7 @@ const FALLBACK_IMAGE = "/images/articles/what-is-intuition.jpg";
 // Local image overrides for posts we already have downloaded images for.
 // Key is a slug derived from the Substack URL path.
 const LOCAL_IMAGES: Record<string, string> = {
+  "parenting-psi": "/images/articles/parenting-psi.jpg",
   "kindling-mystery": "/images/articles/kindling-mystery.jpg",
   "published": "/images/articles/published.jpg",
   "what-conflict-is-teaching-me-about": "/images/articles/conflict-consciousness.jpg",
@@ -24,7 +25,7 @@ const LOCAL_IMAGES: Record<string, string> = {
   "an-unlikely-pairing-intention-letting": "/images/articles/intention.jpg",
   "intuition-neither-divine-nor-mundane": "/images/articles/divine-mundane.jpg",
   "what-is-intuition": "/images/articles/what-is-intuition.jpg",
-  "intuition-a-rediscovery": "/images/articles/rediscovery.jpg",
+  "a-rediscovery": "/images/articles/rediscovery.jpg",
 };
 
 function slugFromUrl(url: string): string {
@@ -114,6 +115,13 @@ export async function fetchResearchArticles(): Promise<ResearchArticle[]> {
 // Hardcoded fallback — used if RSS fetch fails (e.g. network issues in CI)
 const FALLBACK_ARTICLES: ResearchArticle[] = [
   {
+    title: "Parenting Psi",
+    date: "2026-09-01",
+    excerpt: "How do we raise children whose experience exceeds our culture\u2019s version of reality?",
+    image: "/images/articles/parenting-psi.jpg",
+    substackUrl: "https://intointuition.substack.com/p/parenting-psi",
+  },
+  {
     title: "Kindling Mystery",
     date: "2026-01-29",
     excerpt: "On studying consciousness without extinguishing wonder.",
@@ -202,6 +210,6 @@ const FALLBACK_ARTICLES: ResearchArticle[] = [
     date: "2023-05-28",
     excerpt: "My story of this beginning.",
     image: "/images/articles/rediscovery.jpg",
-    substackUrl: "https://intointuition.substack.com/p/intuition-a-rediscovery",
+    substackUrl: "https://intointuition.substack.com/p/a-rediscovery",
   },
 ];
